@@ -1,0 +1,44 @@
+﻿@model CoursePortal.Models.User
+
+@{
+    ViewData["Title"] = "Course Portal";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <hr />
+
+        @if (ViewBag.HasErrors == true)
+        {
+            string loginError = ViewBag.LoginError;
+            @Html.Label("", loginError, new { @class = "text-danger" });
+        }
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Login)
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Login)
+                @Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password)
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Login" class="btn btn-default" />
+            </div>
+        </div>
+
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Return back</a>
+
+    </div>
+}
